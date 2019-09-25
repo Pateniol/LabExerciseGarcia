@@ -27,6 +27,31 @@ public class MainActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.login_button);
         TextView registerTextView = findViewById(R.id.register_textView);
 
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                username = etUsername.getText().toString();
+                password = etPassword.getText().toString();
+                formSuccess = 2;
+
+                if (username.equals("")) {
+                    etUsername.setError("This field is required");
+                    formSuccess--;
+                }
+
+                // validate password
+                if (password.equals("")) {
+                    etPassword.setError("This field is required");
+                    formSuccess--;
+                }
+
+                // form successfully validated
+                if (formSuccess == 2) {
+                    Toast.makeText(getApplicationContext(), "Form successfully validated", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,11 +61,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
