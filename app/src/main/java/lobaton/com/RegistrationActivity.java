@@ -7,15 +7,22 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 public class RegistrationActivity extends AppCompatActivity {
     String username, password, fullName;
     EditText etUsername, etPassword, etFullName;
     int formSuccess = 0;
+    int userid;
+
+    DbHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        db = new DbHelper(this);
 
         etUsername = findViewById(R.id.input_userName);
         etPassword = findViewById(R.id.input_password);
@@ -57,7 +64,19 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 // form successfully validated
                 if (formSuccess == 3) {
-                    Toast.makeText(this, "Form successfully validated", Toast.LENGTH_LONG).show();
+                    HashMap<String, String> map_user = new HashMap();
+                    map_user.put(db.TBL_USER_USERNAME, username);
+                    map_user.put(db.TBL_USER_PASSWORD, password);
+                    map_user.put(db.TBL_USER_FULLNAME, fullName);
+
+                    userid = db.createUser(map_user);
+
+                    if(userid < 1) {
+                        Toast.makeText(this, "USER SUCCESSFULLY CREATED", Toast.LENGTH_SHORT).show();
+                    } else {
+                        etUsername.setError("UserName already exists.");
+                    }
+
                 }
 
                 break;
