@@ -79,4 +79,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected  void onResume() {
+
+        SharedPreferences sharedPref = getSharedPreferences("USER", Context.MODE_PRIVATE);
+        if(sharedPref.contains(db.TBL_USER_ID)) {
+            this.finish();
+            startActivity(new Intent(this, DisplayUsersActivity.class));
+        }
+        super.onResume();
+    }
 }
