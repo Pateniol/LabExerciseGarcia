@@ -1,4 +1,4 @@
-package lobaton.com;
+package garcia.com;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,8 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;

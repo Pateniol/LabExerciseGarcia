@@ -1,4 +1,4 @@
-package lobaton.com;
+package garcia.com;
 
 import org.junit.Test;
 
